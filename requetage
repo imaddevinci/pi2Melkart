@@ -1,0 +1,2 @@
+client.register_search(title='green', range_begin=1, range_end=10)
+response = client.published_data()
