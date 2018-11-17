@@ -1,0 +1,19 @@
+import requests
+import base64
+import json
+import urllib
+import sys
+token_url="http://ops.epo.org/3.2/rest-services/register/search/biblio?Range=1-10&q=ti%3Dbatterie%2Cion"
+   
+
+headers = {'Authorization':'Bearer pGP2I4u9pBxRYBhGNxDf0FUWVa1S'}
+r = requests.get(token_url, headers=headers)
+
+struct = {}
+try:
+    #r = r.decode('utf-8').replace('\0', '')
+    dataform = str(response_json).strip("'<>() ").replace('\'', '\"')
+ 
+    struct = json.loads(dataform)
+except:
+    print('bad json: ', r)
