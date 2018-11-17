@@ -1,12 +1,13 @@
-import epo_ops
-
-client = epo_ops.Client(key='abc', secret='xyz')  # Instantiate client
+ import epo_ops
+    client = epo_ops.Client(key='5Rx0WjPEBsCK8BbWYpIskhjWnUEsbiNR', secret='DrfofJpTD9f6XTgy')  # Instantiate client
 response = client.published_data(  # Retrieve bibliography data
   reference_type = 'publication',  # publication, application, priority
   input = epo_ops.models.Docdb('1000000', 'EP', 'A1'),  # original, docdb, epodoc
   endpoint = 'biblio',  # optional, defaults to biblio in case of published_data
   constituents = []  # optional, list of constituents
 )
+print(response.text)
+
 /////////////////////////////////////////////////
 response = client.register_search(ti=batterie,range_begin=1,range_end=10)
 
