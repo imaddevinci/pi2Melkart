@@ -14,3 +14,18 @@ response = client.register_search(ti=batterie,range_begin=1,range_end=10)
 def register_search(self, cql, range_begin=1, range_end=25):
         range = dict(key='Range', begin=range_begin, end=range_end)
         return self._search_request(self.__register_search_path__, cql, range)
+        
+        
+        
+        import epo_ops
+import urllib.parse
+client = epo_ops.Client(key='5Rx0WjPEBsCK8BbWYpIskhjWnUEsbiNR', secret='DrfofJpTD9f6XTgy')  # Instantiate client
+#r = {'ti=':'batterie,ion'}
+r = 'ti%3Dbatterie%2Cion'
+response = client.register_search( 
+#print(urllib.parse.urlencode(r)),
+    r,
+    range_begin=1, 
+    range_end=10
+)
+
