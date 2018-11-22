@@ -29,3 +29,13 @@ response = client.register_search(
     range_end=10
 )
 
+
+import epo_ops
+import urllib.parse
+import requests
+client = epo_ops.Client(key='5Rx0WjPEBsCK8BbWYpIskhjWnUEsbiNR', secret='DrfofJpTD9f6XTgy')  # Instantiate client
+r = 'ti%3Dbatterie%2Cion'
+response = client.register_search(cql:r, range_begin:1, range_end:10)
+token_url="http://ops.epo.org/3.2/rest-services/register/search/biblio?Range=1-10&q=ti%3Dbatterie%2Cion"
+
+
