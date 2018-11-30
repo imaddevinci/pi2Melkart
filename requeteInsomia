@@ -21,3 +21,30 @@ try:
     struct = json.loads(dataform)
 except:
     print('bad json: ', r)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    import requests
+import base64
+import json
+import urllib
+import sys
+import epo_ops
+from requests.auth import HTTPBasicAuth
+token_url="http://ops.epo.org/3.2/rest-services/register/search/biblio?Range=1-10&q=ti%3Dbatterie%2Cion"
+   
+
+headers = {'Accept':'application/json'}
+r = requests.get(token_url, headers=headers, auth=HTTPBasicAuth('Dimtech', 'Dim20121981'))
+r.text
