@@ -33,9 +33,9 @@ namespace projetpi
             client.DefaultRequestHeaders.Add("Accept", "application/json");
 
             var byteArray = Encoding.ASCII.GetBytes("Dimtech:Dim20121981");
-            var accept=
+            var accept =
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
-         
+
             HttpResponseMessage response = await client.GetAsync(TARGETURL);
             HttpContent content = response.Content;
 
@@ -45,35 +45,35 @@ namespace projetpi
             // ... Read the string.
             string result = await content.ReadAsStringAsync();
 
-           
 
-       
+
+
 
             // ... Display the result.
             if (result != null && result.Length >= 50)
             {
 
-               // Console.WriteLine(result);
+                // Console.WriteLine(result);
 
             }
             dynamic obj = JsonConvert.DeserializeObject(result);
-            
 
-       //      JObject jsonVal = JObject.Parse(result) as JObject;
+
+            //      JObject jsonVal = JObject.Parse(result) as JObject;
 
             // string val = (string)obj["ops:world-patent-data"];
 
-         //  string value = (string)obj["@xmlns"];
+            //  string value = (string)obj["@xmlns"];
 
-         //  Console.WriteLine(value.ToString());
+            //  Console.WriteLine(value.ToString());
 
-         //   var j = JsonConvert.DeserializeObject<dynamic>(result);
-           //Console.WriteLine("ops:register-search : {0}", j.);
+            //   var j = JsonConvert.DeserializeObject<dynamic>(result);
+            //Console.WriteLine("ops:register-search : {0}", j.);
 
             JObject jObject = JObject.Parse(result);
 
-            // Instead of WriteLine, 2 or 3 lines of code here using WebClient to download the file 
-            Console.WriteLine(Convert.ToString(jObject["ops:world-patent-data"]["ops:register-search"]));
+            // Instead of WriteLine, 2 or 3 lines of code here using WebClient to download the file  "reg:register-document"  "reg:bibliographic-data" "reg:applicant" "reg:parties" ["reg:parties"]["reg:applicant"] @sequence reg:applicant reg:name
+            Console.WriteLine(Convert.ToString(jObject["ops:world-patent-data"]["ops:register-search"]["reg:register-documents"]["reg:register-document"][0]["reg:bibliographic-data"]["reg:parties"]["reg:applicants"]["reg:applicant"]["reg:addressbook"]["reg:name"]));
 
         }
     }
