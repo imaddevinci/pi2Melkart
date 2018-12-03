@@ -6,6 +6,10 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
 
 namespace projetpi
 {
@@ -20,16 +24,18 @@ namespace projetpi
 
         static async void HTTP_GET()
         {
-            var TARGETURL = "http://ops.epo.org/3.2/rest-services/register/search/biblio?Range=1-10&q=ti%3Dbatterie%2Cion";
+            var TARGETURL = "http://ops.epo.org/3.2/rest-services/register/search/biblio?Range=1-2&q=ti%3Dbatterie%2Cion";
 
             Console.WriteLine("GET: + " + TARGETURL);
 
             // ... Use HttpClient.            
             HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
 
             var byteArray = Encoding.ASCII.GetBytes("Dimtech:Dim20121981");
+            var accept=
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
-
+         
             HttpResponseMessage response = await client.GetAsync(TARGETURL);
             HttpContent content = response.Content;
 
@@ -39,11 +45,36 @@ namespace projetpi
             // ... Read the string.
             string result = await content.ReadAsStringAsync();
 
+           
+
+       
+
             // ... Display the result.
             if (result != null && result.Length >= 50)
             {
-                Console.WriteLine(result);
+
+               // Console.WriteLine(result);
+
             }
+            dynamic obj = JsonConvert.DeserializeObject(result);
+            
+
+       //      JObject jsonVal = JObject.Parse(result) as JObject;
+
+            // string val = (string)obj["ops:world-patent-data"];
+
+         //  string value = (string)obj["@xmlns"];
+
+         //  Console.WriteLine(value.ToString());
+
+         //   var j = JsonConvert.DeserializeObject<dynamic>(result);
+           //Console.WriteLine("ops:register-search : {0}", j.);
+
+            JObject jObject = JObject.Parse(result);
+
+            // Instead of WriteLine, 2 or 3 lines of code here using WebClient to download the file 
+            Console.WriteLine(Convert.ToString(jObject["ops:world-patent-data"]["ops:register-search"]));
+
         }
     }
 }
